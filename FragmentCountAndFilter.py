@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def count_frag_filter_cells(filename, min_peak_count):
@@ -24,7 +25,13 @@ def count_frag_filter_cells(filename, min_peak_count):
     peak_counts = filtered_sc_df.sum(axis=0)
     peak_counts = peak_counts.sort_values(axis=0, ascending=False)
     top_5_peak_counts = peak_counts.head(5)
+    plot_frag_counts(peak_counts)
     return top_5_peak_counts
+
+
+def plot_frag_counts(peak_count_df):
+    sns.distplot(a=peak_count_df, color='purple')
+    plt.show()
 
 
 # example implementation

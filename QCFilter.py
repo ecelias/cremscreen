@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def filter_sc(filename):
@@ -24,6 +25,7 @@ def filter_sc(filename):
 
     # sum the filtered gene expression counts
     filtered_count = filtered_sc_df.sum(axis=0)
+    print(filtered_count.shape)
 
     return plot_data(initial_count, filtered_count)
 
@@ -40,7 +42,8 @@ def plot_data(initial_count, filtered_count):
         ax.set_ylabel('Gene Expression Counts')
 
     plt.tight_layout()
-    plt.savefig('quality_control_and_filtering.png')
+    #plt.show()
+    #plt.savefig('quality_control_and_filtering.png')
 
 
 # example implementation

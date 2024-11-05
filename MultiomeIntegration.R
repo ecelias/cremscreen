@@ -4,11 +4,6 @@ library(tidyr)
 library(data.table)
 library(readr)
 
-plot_multiome <- function(multiome_sum) {
-  multiome_comparison <- ggplot(multiome_sum, aes(x=merged_frag_sums, y=merged_gene_sums)) + geom_point()
-  ggsave(multiome_comparison, device = "png")
-}
-
 multiome_analysis <- function(filename1, filename2){
   # read in the csv files
   total_counts <- read_csv(filename1)
@@ -60,12 +55,13 @@ multiome_analysis <- function(filename1, filename2){
     genes = c(merged_gene_sums)
   )
   
-  plot_multiome(sums_df)
+  ggplot(sums_df, aes(x=merged_frag_sums, y=merged_gene_sums)) + geom_point()
+  ggsave('multiome_sum.png')
 }
 
 # sample usage
-filename1 <- 'scATAC_counts.csv'
-filename2 <- 'scATAC_fragment_counts.csv'
-multiome_analysis(filename1, filename2)
+file1 <- 'scRNA_counts.csv'
+file2 <- 'scATAC_counts.csv'
+multiome_analysis(file1, file2)
 
 

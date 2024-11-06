@@ -13,5 +13,5 @@ uses the <code>call</code> function, which is blocking.</li>
 and a value for the minimum peak count for each cell in the dataset. With the example data provided, there
 were no such cells that had more than 500 peaks for a given cell type. </li></ul> 
 
-<p><strong>Python libraries used:</strong> matplotlib, subprocess, seaborn, pandas
-<p><strong>R libraries used:</strong>
+<p><strong>Python libraries used:</strong> matplotlib, scikit-learn, seaborn, pandas
+<p><strong>R libraries used:</strong> dyplr, readr, tidyr, ggplot2, data.table

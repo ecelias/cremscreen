@@ -59,7 +59,7 @@ sums_df <- data.frame(
 )
 
 write.csv(merged, file="merged_atac_rna_counts.csv")
-write.csv(sums_df, file="merged__atac_rna_count_sums.csv")
+write.csv(sums_df, file= "merged_atac_rna_count_sums.csv")
 
 ggplot(sums_df, aes(x=merged_frag_sums, y=merged_gene_sums)) + geom_point()
 ggsave('multiome_sum.png')

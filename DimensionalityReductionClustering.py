@@ -3,15 +3,15 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import numpy as np
 import umap
-from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import silhouette_score
 from sklearn.cluster import KMeans
 
 
 filename = 'merged_atac_rna_counts.csv'
+sums_filename = 'merged_atac_rna_count_sums.csv'
 merged_data = pd.read_csv(filename, index_col=0)
+merged_data_sums = pd.read_csv(filename, index_col=0)
 
 
 def plot_pca(pca_df, x_axis='PC1', y_axis='PC2', dot_alpha=0.3, dot_size=10, use_name_to_save='plot',
@@ -46,20 +46,20 @@ def plot_pca(pca_df, x_axis='PC1', y_axis='PC2', dot_alpha=0.3, dot_size=10, use
         #'ko' means black color and circle markers
 
     plt.tight_layout()
-    #plt.savefig(use_name_to_save, transparent=True, dpi=300)
+    plt.savefig(use_name_to_save, transparent=True, dpi=300)
     #plt.show()
 
 
 def plot_umap(umap_df, cluster_labels='clusters', dot_alpha=0.3, dot_size=10, plot_points=None,
               use_name_to_save='plot', remove_legend=0, bw_adjust=1):
 
-    plt.figure(figsize=(5, 8))
+    plt.figure(figsize=(10, 8))
     sns.scatterplot(x=umap_df[:, 0], y=umap_df[:, 1], hue=cluster_labels, palette='viridis', s=60)
     plt.title('UMAP projection colored by K-means clusters')
     plt.legend(title='Cluster', loc='best', bbox_to_anchor=(1, 1))
     plt.tight_layout()
     plt.savefig(use_name_to_save, transparent=True, dpi=300)
-    plt.show()
+    #plt.show()
 
 
 def scale_data(df):
@@ -105,39 +105,11 @@ def pca_umap(df):
     pc2 = principal_comps[:, 1]
 
     kmeans = KMeans(n_clusters=2, random_state=42)
-    clusters = kmeans.fit_predict(principal_comps)
+    clusters = kmeans.fit_predict(umap_data)
     M = pd.DataFrame({'PC1': pc1, 'PC2': pc2, 'clusters': clusters})
 
     plot_pca(M, use_marginals=1, dot_size=30, dot_alpha=1, use_name_to_save="multiome_pca.png")
     plot_umap(umap_data, cluster_labels=clusters, dot_size=30, dot_alpha=1, use_name_to_save="multiome_umap.png")
 
 
-
 print(pca_umap(merged_data))
-
- # Elbow Method
-def elbow_method(data, max_clusters=10):
-    inertia = []
-    for n in range(1, max_clusters + 1):
-        kmeans = KMeans(n_clusters=n, random_state=42)
-        kmeans.fit(data)
-        inertia.append(kmeans.inertia_)
-    plt.figure(figsize=(8, 4))
-    plt.plot(range(1, max_clusters + 1), inertia, marker='o')
-    plt.title('Elbow Method')
-    plt.xlabel('Number of Clusters')
-    plt.ylabel('Inertia')
-    plt.show()
-# Silhouette Analysis
-def silhouette_analysis(data, max_clusters=10):
-    silhouette_avg = []
-    for n in range(2, max_clusters + 1):
-        kmeans = KMeans(n_clusters=n, random_state=42)
-        cluster_labels = kmeans.fit_predict(data)
-        silhouette_avg.append(silhouette_score(data, cluster_labels))
-    plt.figure(figsize=(8, 4))
-    plt.plot(range(2, max_clusters + 1), silhouette_avg, marker='o')
-    plt.title('Silhouette Analysis')
-    plt.xlabel('Number of Clusters')
-    plt.ylabel('Average Silhouette Score')
-    plt.show()

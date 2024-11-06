@@ -115,5 +115,5 @@ def pca_umap(df):
 filename = 'merged_atac_rna_counts.csv'
 sums_filename = 'merged_atac_rna_count_sums.csv'
 merged_data = pd.read_csv(filename, index_col=0)
-merged_data_sums = pd.read_csv(filename, index_col=0)
-pca_umap(merged_data_sums)
+merged_data_sums = pd.read_csv(sums_filename, index_col=0)
+pca_umap(merged_data)

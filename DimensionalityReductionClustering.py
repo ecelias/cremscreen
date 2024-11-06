@@ -8,11 +8,6 @@ import seaborn as sns
 from sklearn.cluster import KMeans
 
 
-filename = 'merged_atac_rna_counts.csv'
-sums_filename = 'merged_atac_rna_count_sums.csv'
-merged_data = pd.read_csv(filename, index_col=0)
-merged_data_sums = pd.read_csv(filename, index_col=0)
-
 
 def plot_pca(pca_df, x_axis='PC1', y_axis='PC2', dot_alpha=0.3, dot_size=10, use_name_to_save='plot',
              plot_points=None, use_marginals=0, remove_legend=0):
@@ -110,10 +105,15 @@ def pca_umap(df):
 
     df['Cluster'] = clusters
 
-    merged_data_with_clusters = df.to_csv('merged_data_with_clusters.csv')
+    merged_data_with_clusters = df.to_csv('merged_sums_with_clusters.csv')
 
     plot_pca(M, use_marginals=1, dot_size=30, dot_alpha=1, use_name_to_save="multiome_pca.png")
     plot_umap(umap_data, cluster_labels=clusters, dot_size=30, dot_alpha=1, use_name_to_save="multiome_umap.png")
 
 
-print(pca_umap(merged_data))
+# sample implementation
+filename = 'merged_atac_rna_counts.csv'
+sums_filename = 'merged_atac_rna_count_sums.csv'
+merged_data = pd.read_csv(filename, index_col=0)
+merged_data_sums = pd.read_csv(filename, index_col=0)
+pca_umap(merged_data_sums)

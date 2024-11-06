@@ -108,6 +108,10 @@ def pca_umap(df):
     clusters = kmeans.fit_predict(umap_data)
     M = pd.DataFrame({'PC1': pc1, 'PC2': pc2, 'clusters': clusters})
 
+    df['Cluster'] = clusters
+
+    merged_data_with_clusters = df.to_csv('merged_data_with_clusters.csv')
+
     plot_pca(M, use_marginals=1, dot_size=30, dot_alpha=1, use_name_to_save="multiome_pca.png")
     plot_umap(umap_data, cluster_labels=clusters, dot_size=30, dot_alpha=1, use_name_to_save="multiome_umap.png")
 

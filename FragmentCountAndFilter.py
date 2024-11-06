@@ -31,7 +31,8 @@ def count_frag_filter_cells(filename, min_peak_count):
 
 def plot_frag_counts(peak_count_df):
     sns.distplot(a=peak_count_df, color='purple')
-    plt.show()
+    #plt.show()
+    plt.savefig('fragment_count_and_filtering.png')
 
 
 # example implementation

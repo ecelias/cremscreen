@@ -43,7 +43,7 @@ def plot_data(initial_count, filtered_count):
 
     plt.tight_layout()
     #plt.show()
-    #plt.savefig('quality_control_and_filtering.png')
+    plt.savefig('quality_control_and_filtering.png')
 
 
 # example implementation

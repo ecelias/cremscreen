@@ -29,6 +29,7 @@ and provides built-in statistical testing. It is specifically designed for RNAse
 fold changes and p-values needed to identify the most differentially expressed genes. Presenting this data
 with a volcano plot, which shows statistical significance versus fold change, highlights the key
 findings in this data in an easily interpretable manner. 
+<img src="https://research-git.uiowa.edu/ecelias/cremscreen/-/raw/main/DifferentialExpressionAnalysisPlot.png?ref_type=heads" />
 
 <p>A note for Task 2: <ul>
 <li>The <code>count_frag_filter_cells</code> function to filter the ATAC fragment counts accepts a file name

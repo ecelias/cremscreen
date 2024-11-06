@@ -9,7 +9,7 @@ file1 <- 'scRNA_counts.csv'
 file2 <- 'scATAC_counts.csv'
 
 # read in the csv files
-total_counts <- read_csv(file1)
+total_counts <- read.csv(file1)
 fragment_counts <- read.csv(file2)
 
 # transpose the data frames (using data.table)

@@ -1,41 +1,74 @@
+# Load libraries
+library(DESeq2)
+library(EnhancedVolcano)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(data.table)
 library(readr)
-library(DESeq2)
 
-merged_data_csv <- "merged_data_with_clusters.csv"
-merged_counts <- read.csv(merged_data_csv)
-names(merged_counts)[1] <- "CellID"
+# Load data
+merged_data <- read.csv("merged_data_with_clusters.csv")
 
-rownames(merged_counts) <- merged_counts$CellID
-merged_counts$CellID <- NULL
+# Separate clusters
+cluster_data <- merged_data$Cluster
+counts_data <- merged_data
+counts_data$Cluster <- NULL
 
-diff_exp <- function(data){
-  cluster_labels <- as.factor(data$Cluster)
-  expression_data <- data[, -ncol(data)]
-  expression_data <- expression_data[rowSums(expression_data) > 0, ]  # Remove Cluster column
+counts_data_t <- transpose(counts_data)
+rownames(counts_data_t) <- colnames(counts_data)
+colnames(counts_data_t) <- rownames(counts_data)
+
+colnames(counts_data_t) <- counts_data_t[1,]
+counts_data_t <- counts_data_t[-1,]
+
+rownames(counts_data) <- counts_data[,1]
+counts_data <- counts_data[,-1]
+
+data_matrix <- as.matrix(counts_data_t)
+clusters <- data.frame(cluster = as.factor(cluster_data))
+clusters_t <- transpose(clusters)
+
+
+# Define the function to perform differential expression analysis
+differential_expression_analysis <- function(expression, meta) {
   
-  # Create a DESeqDataSet
-  col_data <- data.frame(cluster = cluster_labels)
-  dds <- DESeqDataSetFromMatrix(countData = t(expression_data), 
-                                colData = col_data, 
+  data_matrix <- data.matrix(expression)
+  clusters <- as.data.frame(meta)
+  
+  # Create DESeq2 dataset
+  dds <- DESeqDataSetFromMatrix(countData = data_matrix,
+                                colData = clusters,
                                 design = ~ cluster)
   
-  # Run DESeq2 differential expression analysis
-  dds <- DESeq(dds)
-  results <- results(dds)
   
-  # Order results by p-value and log2 fold change
-  results <- results[order(results$padj, -abs(results$log2FoldChange)), ]
+  # Perform DE analysis, with workaround for dispersion error
+  dds <- estimateSizeFactors(dds)
+  dds <- estimateDispersionsGeneEst(dds)  # Use gene-wise estimates for dispersion
+  dispersions(dds) <- mcols(dds)$dispGeneEst  # Set dispersions
+  dds <- nbinomWaldTest(dds)  # Continue with testing
   
-  # Get top 10 differentially expressed genes
-  top_genes <- head(results, 10)
+  res <- results(dds)
+  
+  # Sort results by adjusted p-value and select top 10 genes
+  res <- res[order(res$padj), ]
+  top_genes <- head(res, 10)
+  
+  # Print top genes
   print(top_genes)
   
+  # Plot volcano plot
+  EnhancedVolcano(res,
+                  lab = rownames(res),
+                  x = 'log2FoldChange',
+                  y = 'pvalue',
+                  title = 'Volcano plot of differential expression',
+                  pCutoff = 0.05,
+                  FCcutoff = 1)
 }
 
-diff_exp(merged_counts)
+# Run the function
+differential_expression_analysis(expression=counts_data, meta=clusters_t)
+
 
 

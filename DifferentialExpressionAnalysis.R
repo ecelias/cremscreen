@@ -31,7 +31,7 @@ clusters_t <- transpose(clusters)
 
 
 # Define the function to perform differential expression analysis
-differential_expression_analysis <- function(expression, meta) {
+diff_express <- function(expression, meta) {
   
   data_matrix <- data.matrix(expression)
   clusters <- as.data.frame(meta)
@@ -68,7 +68,7 @@ differential_expression_analysis <- function(expression, meta) {
 }
 
 # Run the function
-differential_expression_analysis(expression=counts_data, meta=clusters_t)
+diff_express(expression=counts_data, meta=clusters_t)
 
 
 

@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9efaef2b-60fc-4efe-85b2-6835331d0a03" name="Changes" comment="QCFilter and initial FragmentCountAndFilter scripts">
-      <change beforePath="$PROJECT_DIR$/DimensionalityReductionClustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/DimensionalityReductionClustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DifferentialExpressionAnalysis.R" beforeDir="false" afterPath="$PROJECT_DIR$/DifferentialExpressionAnalysis.R" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

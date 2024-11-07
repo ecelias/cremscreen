@@ -2,7 +2,7 @@
 <h3>Applicant: Elizabeth Elias</h3>
 
 <p>To the hiring team at the Center for Regenerative Medicine, <br>
-Thank your for this opportunity to continue interviewing for this position. I'm super excited for more updates regarding the role. 
+Thank you for this opportunity to continue interviewing for this position. I'm super excited for more updates regarding the role. 
 <strong>Please treat this README as the report requested by the screening test instructions.</strong>
 <br> 
 <h4>Task 1</h4>

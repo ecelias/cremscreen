@@ -17,7 +17,6 @@ captured by this dataset and the additional kernel layer density plot aids in id
 in the distribution of fragment counts by allowing the audience to observe any peaks, skews or 
 multimodel behavior in the distribution. 
 <img src="https://github.com/ecelias/cremscreen/blob/main/fragment_count_and_filtering.png?raw=true" />
-<img src= "https://github.com/ecelias/cremscreen/blob/main/multiome_sum.png?raw=true" />
 <h4>Task 3</h4>
 Datasets were merged using dyplr's inner_join method as an inner join will only keep CellID's that are present
 in both datasets, which mitigates the need for an additional filtering step if one were to use the built in merge

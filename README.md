@@ -10,30 +10,31 @@ Plotted with a histogram to capture the distribution of the range of gene detect
 across the cells in the datasets. By binning cells based on the number of detected genes, 
 the side-by-side histogram is able to effectively capture changes in distribution before and after
 quality control and filtering was performed.
-<img src="https://research-git.uiowa.edu/ecelias/cremscreen/-/raw/main/quality_control_and_filtering.png?ref_type=heads" />
+<img src="https://github.com/ecelias/cremscreen/blob/main/quality_control_and_filtering.png?raw=true" />
 <h4>Task 2</h4>
 Similar to task 1, a histogram is able to capture the distribution in the range of gene detection
 captured by this dataset and the additional kernel layer density plot aids in identifying patterns
 in the distribution of fragment counts by allowing the audience to observe any peaks, skews or 
 multimodel behavior in the distribution. 
-<img src= "https://research-git.uiowa.edu/ecelias/cremscreen/-/raw/main/fragment_count_and_filtering.png?ref_type=heads" />
+<img src="https://github.com/ecelias/cremscreen/blob/main/fragment_count_and_filtering.png?raw=true" />
+<img src= "https://github.com/ecelias/cremscreen/blob/main/multiome_sum.png?raw=true" />
 <h4>Task 3</h4>
 Datasets were merged using dyplr's inner_join method as an inner join will only keep CellID's that are present
 in both datasets, which mitigates the need for an additional filtering step if one were to use the built in merge
 method. The top 5 highest regions were calculated with row sums and a scatter plot is able to effectively capture
 the correlation between two variables, in this case total RNA and ATAC counts. 
-<img src="https://research-git.uiowa.edu/ecelias/cremscreen/-/raw/main/multiome_sum.png?ref_type=heads" />
+<img src= "https://github.com/ecelias/cremscreen/blob/main/multiome_sum.png?raw=true" />
 <h4>Task 4</h4>
 Data was scaled using scikit-learns standard scaler functionality. K means clustering was used as
 after scaling, the data is well suited for comparisons which rely on Euclidean distances. 
-<img src="https://research-git.uiowa.edu/ecelias/cremscreen/-/raw/main/multiome_umap.png?ref_type=heads" />
+<img src="https://github.com/ecelias/cremscreen/blob/main/multiome_umap.png?raw=true" />
 <h4>Task 5</h4>
 DESeq2 was chosen to perform the differential expression analysis as it automatically normalizes data
 and provides built-in statistical testing. It is specifically designed for RNAseq data and provides the 
 fold changes and p-values needed to identify the most differentially expressed genes. Presenting this data
 with a volcano plot, which shows statistical significance versus fold change, highlights the key
 findings in this data in an easily interpretable manner. 
-<img src="https://research-git.uiowa.edu/ecelias/cremscreen/-/raw/main/DifferentialExpressionAnalysisPlot.png?ref_type=heads" />
+<img src="https://github.com/ecelias/cremscreen/blob/main/DifferentialExpressionAnalysisPlot.png?raw=true" />
 
 <p>A note for Task 2: <ul>
 <li>The <code>count_frag_filter_cells</code> function to filter the ATAC fragment counts accepts a file name
